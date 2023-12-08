@@ -1,0 +1,49 @@
+.input__container--calc {
+	padding: 10px;
+	background-color: #fbfafa82;
+}
+.section__heading {
+	font-size: 19px;
+	font-weight: 500;
+	color: #0070ba;
+	padding: 10px 0px;
+}
+.grid3x3 {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 10px;
+}
+.output__container__calc {
+	padding: 10px;
+}
+.res__caption {
+	text-align: center;
+	display: block;
+	font-weight: 500;
+	padding: 10px;
+	text-transform: uppercase;
+}
+.table__res {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	table-layout: fixed;
+}
+.table__res th {
+	font-size: 0.85em;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+	background-color: #0070ba;
+	color: #fff;
+    color: #555;
+	font-weight: 700;
+	padding: 9px 24px;
+}
+.entry-content thead th, .entry-content tr th {
+	color: #555;
+	font-weight: 700;
+	padding: 9px 24px;
+}

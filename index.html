@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="input__container--calc">
+    <h2 class="section__heading">Purchase Details Input</h2>
+    <div class="grid3x3">
+      <div class="row__calc">
+        <label for="" class="label__calc">Price</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="price__inp" onchange="formatValue(this)" placeholder="Input purchase price">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Deposit </label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="deposit__inp" placeholder="Deposit in %" onchange="OnDepositChange(this)">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">State</label>
+        <div class="combined__calc">
+          <select name="" id="state__inp" class="input__calc" onchange="calculateStampDuty(this)">
+            <option selected="">Select State</option>
+            <option selected="" value="WA">WA</option>
+            <option value="NSW">NSW</option>
+            <option value="NT">NT</option>
+            <option value="TAS">TAS</option>
+            <option value="VIC">VIC</option>
+            <option value="QLD">QLD</option>
+            <option value="ACT">ACT</option>
+            <option value="SA">SA</option>
+          </select>
+        </div>
+      </div>
+      <div class="row__calc">
+        <div><label for="" class="label__calc">Stamp Duty</label>
+        <!--<label for="" class="label_hint__calc">This is a rough estimation</label>--></div>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" placeholder="*rough estimate*" id="stampDuty__inp" onchange="formatValue(this)">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Solicitor Charge</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="solicitor__inp" onchange="formatValue(this)" placeholder="$0.00" value="$2,500">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Other Costs</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" onchange="formatValue(this)" id="renovation__inp" placeholder="Input Repairs or B&amp;P costs">
+        </div>
+      </div>
+      <!--<div class="row__calc">
+        <label for="" class="label__calc">Property Value</label>
+        <div class="combined__calc">
+          <input
+            type="text"
+            class="input__calc"
+            id="propertyVal__inp"
+            onchange="formatValue(this)"
+            placeholder="$0.00"
+            value="$500,000"
+          />
+        </div>
+      </div>-->
+      <div class="row__calc">
+        <label for="" class="label__calc">Weekly Rent</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" onchange="formatValue(this)" id="weeklyRent__inp" placeholder="Input rent">
+        </div>
+      </div>
+    </div>
+    <h2 class="section__heading">Rates (Yearly)</h2>
+    <div class="grid3x3">
+      <div class="row__calc">
+        <label for="" class="label__calc">Council</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="council__inp" value="$400" onchange="formatValue(this)" placeholder="Input Council Rates">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Water</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="water__inp" onchange="formatValue(this)" placeholder="Input Water rates" value="$400">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Strata</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="strate__inp" onchange="formatValue(this)" placeholder="Input Strata costs " value="$0">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Building insurance (houses only)</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" onchange="formatValue(this)" id="buildIns__inp" placeholder="Input Building Insurance  " value="$800">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Landlords Insurance</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="landlord__inp" onchange="formatValue(this)" placeholder="Input Landlord Insurance" value="$320">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Total</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" disabled="" value="$0.00" id="total__out" onchange="formatValue(this)" placeholder="$0.00">
+        </div>
+      </div>
+    </div>
+    <h2 class="section__heading">Interest Rates (Loan/Top Up Accounts)</h2>
+    <div class="grid3x3">
+      <div class="row__calc">
+        <label for="" class="label__calc">Deposit Source - Cash or Equity</label>
+        <div class="combined__calc">
+          <select name="" id="depositSource__inp" class="input__calc" onchange="calculateResult()">
+            <option value="0" selected="">Cash</option>
+            <option value="1">Equity</option>
+          </select>
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Mortgage 1 Rate</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="mortgage1Rate__inp" placeholder="0.00%" value="4.5%" onchange="formatPercentage(this)">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Mortgage 1 Amount</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" disabled="" id="mortgage1Amt__out" onchange="formatValue(this)" value="$0.00" placeholder="$0.00">
+        </div>
+      </div>
+      <div class="row__calc" id="mortgage2_rate" style="display: none;">
+        <label for="" class="label__calc">Mortgage 2 Rate</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="mortgage2Rate__inp" placeholder="Input rate of Equity loan" onchange="formatPercentage(this)">
+        </div>
+      </div>
+      <div class="row__calc" id="mortgage2_amt" style="display: none;">
+        <label for="" class="label__calc">Mortgage 2 Amount</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" disabled="" value="$0.00" id="mortgage2Amt__out" onchange="formatValue(this)" placeholder="$0.00">
+        </div>
+      </div>
+      <!--<div class="row__calc">
+        <label for="" class="label__calc">Mortgage 3 Rate</label>
+        <div class="combined__calc">
+          <input
+            type="text"
+            class="input__calc"
+            id="mortgage3Rate__inp"
+            placeholder="0.00%"
+            value="0%"
+            onchange="formatPercentage(this)"
+          />
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Mortgage 3 Amount </label>
+        <div class="combined__calc">
+          <input
+            type="text"
+            class="input__calc"
+            id="mortgage3Amt__inp"
+            placeholder="$0.00"
+            value="$0"
+            onchange="formatValue(this)"
+          />
+        </div>
+      </div>-->
+      <div class="row__calc">
+        <label for="" class="label__calc">Annual Borrowing / Package Costs</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" onchange="formatValue(this)" id="annualBorrowing__inp" placeholder="$0.00" value="$395">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Property Management Rate</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="propertyMngmtRate__inp" onchange="formatPercentage(this)" placeholder="Input rate in %">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Depreciation Estimate</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="depreciationEstimate__inp" onchange="formatValue(this)" placeholder="$0.00" value="$0">
+        </div>
+      </div>
+      <div class="row__calc" id="lmi">
+        <label for="" class="label__calc">LMI</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="lmi__inp" onchange="formatValue(this)" placeholder="Input LMI if deposit less than 20%">
+        </div>
+      </div>
+    </div>
+    <h2 class="section__heading">
+      Your Income Tax Rate
+    </h2>
+    <div class="grid3x3">
+      <div class="row__calc">
+        <label for="" class="label__calc">Income</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" id="income__inp" placeholder="$0.00" value="$200,000" onchange="formatValue(this)">
+        </div>
+      </div>
+      <div class="row__calc">
+        <label for="" class="label__calc">Income Tax Rate</label>
+        <div class="combined__calc">
+          <input type="text" class="input__calc" onchange="formatPercentage(this)" id="incomeTaxRate__inp" placeholder="0.00%" value="45%">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="output__container__calc">
+    <span class="res__caption">Your Calculated Result</span>
+    <table class="table__res">
+      <thead>
+        <tr>
+          <th scope="col">Summary</th>
+          <th style="display:none;" scope="col">Per Col K</th>
+          <th scope="col">Yearly</th>
+          <th scope="col">Monthly</th>
+          <th scope="col">Weekly</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td data-label="Summary">Rent</td>
+          <td style="display:none;" data-label="Per Col K" id="rent">$0</td>
+          <td data-label="Yearly" id="rent">$0</td>
+          <td data-label="Monthly" id="rent">$0</td>
+          <td data-label="Weekly" id="rent">$0</td>
+        </tr>
+        <tr>
+          <td data-label="Summary">@ Interest only repayments</td>
+          <td style="display:none;" data-label="Per Col K" id="interestOnly">$0</td>
+          <td data-label="Yearly" id="interestOnly">$0</td>
+          <td data-label="Monthly" id="interestOnly">$0</td>
+          <td data-label="Weekly" id="interestOnly">$0</td>
+        </tr>
+        <tr>
+          <td data-label="Summary">Council Rates</td>
+          <td style="display:none;" data-label="Per Col K" id="councilRate">$400</td>
+          <td data-label="Yearly" id="councilRate">$400</td>
+          <td data-label="Monthly" id="councilRate">$33.33</td>
+          <td data-label="Weekly" id="councilRate">$7.69</td>
+        </tr>
+        <tr>
+          <td data-label="Summary">Water Rates</td>
+          <td style="display:none;" data-label="Per Col K" id="waterRate">$400</td>
+          <td data-label="Yearly" id="waterRate">$400</td>
+          <td data-label="Monthly" id="waterRate">$33.33</td>
+          <td data-label="Weekly" id="waterRate">$7.69</td>
+        </tr>
+        <tr>
+          <td data-label="Summary">Property Agent (incl. GST) @</td>
+          <td style="display:none;" data-label="Per Col K" id="propertyAgent">$0</td>
+          <td data-label="Yearly" id="propertyAgent">$0</td>
+          <td data-label="Monthly" id="propertyAgent">$0</td>
+          <td data-label="Weekly" id="propertyAgent">$0</td>
+        </tr>
+        <tr id="strate__body__corporate_Row" style="display: none;">
+          <td data-label="Summary">Strata / Body Corporate</td>
+          <td style="display:none;" data-label="Per Col K" id="strate__body__corporate">$0</td>
+          <td data-label="Yearly" id="strate__body__corporate">$0</td>
+          <td data-label="Monthly" id="strate__body__corporate">$0</td>
+          <td data-label="Weekly" id="strate__body__corporate">$0</td>
+        </tr>
+        <tr>
+          <td data-label="Summary">Building / Landlords Insurance</td>
+          <td style="display:none;" data-label="Per Col K" id="building__landlord">$1,120</td>
+          <td data-label="Yearly" id="building__landlord">$1,120</td>
+          <td data-label="Monthly" id="building__landlord">$93.33</td>
+          <td data-label="Weekly" id="building__landlord">$21.54</td>
+        </tr>
+        <tr>
+          <td data-label="Summary">Annual Borrowing Costs</td>
+          <td style="display:none;" data-label="Per Col K" id="annualBorrowingCost">$0</td>
+          <td data-label="Yearly" id="annualBorrowingCost">$395</td>
+          <td data-label="Monthly" id="annualBorrowingCost">$32.92</td>
+          <td data-label="Weekly" id="annualBorrowingCost">$7.6</td>
+        </tr>
+        <tr class="bold__row">
+          <td data-label="Summary">Total Expenses</td>
+          <td style="display:none;" data-label="Per Col K" id="totalExpense">$1,920</td>
+          <td data-label="Yearly" id="totalExpense">$2,315</td>
+          <td data-label="Monthly" id="totalExpense">$192.92</td>
+          <td data-label="Weekly" id="totalExpense">$44.52</td>
+        </tr>
+        <tr class="bold__row">
+          <td data-label="Summary">
+            Cash Flow pre non-cash deductions
+          </td>
+          <td style="display:none;" data-label="Per Col K" id="netIncome">$0</td>
+          <td data-label="Yearly" class="red__flag" id="netIncome" style="background: rgb(231, 76, 60); color: rgb(255, 255, 255);">-$2,315</td>
+          <td data-label="Monthly" class="red__flag" id="netIncome" style="background: rgb(231, 76, 60); color: rgb(255, 255, 255);">-$192.92</td>
+          <td data-label="Weekly" class="red__flag" id="netIncome" style="background: rgb(231, 76, 60); color: rgb(255, 255, 255);">-$44.52</td>
+        </tr>
+        <tr class="bold__row">
+          <td data-label="Summary">Non-Cash Expenses</td>
+          <td style="display:none;" data-label="Per Col K" id="non__cashExp">$0</td>
+          <td data-label="Yearly" id="non__cashExp">$0</td>
+          <td data-label="Monthly" id="non__cashExp">$0</td>
+          <td data-label="Weekly" id="non__cashExp">$0</td>
+        </tr>
+        <tr id="depreciationEstimateOnlyRow" style="display: none;">
+          <td data-label="Summary">Depreciation (Estimate Only)</td>
+          <td style="display:none;" data-label="Per Col K" id="depreciationEstimateOnly">$0</td>
+          <td data-label="Yearly" id="depreciationEstimateOnly">$0</td>
+          <td data-label="Monthly" id="depreciationEstimateOnly">$0</td>
+          <td data-label="Weekly" id="depreciationEstimateOnly">$0</td>
+        </tr>
+        <tr id="lmi__estimateOnlyRow" style="display: none;">
+          <td data-label="Summary">
+            LMI (Estimate only ; deductible over 5 years only)
+          </td>
+          <td style="display:none;" data-label="Per Col K" id="lmi__estimateOnly">$0</td>
+          <td data-label="Yearly" id="lmi__estimateOnly">$0</td>
+          <td data-label="Monthly" id="lmi__estimateOnly">$0</td>
+          <td data-label="Weekly" id="lmi__estimateOnly">$0</td>
+        </tr>
+        <tr>
+          <td data-label="Summary">Net Taxable Gain / (Loss)</td>
+          <td style="display:none;" data-label="Per Col K" id="netTaxableGain">$0</td>
+          <td data-label="Yearly" id="netTaxableGain">-$2,315</td>
+          <td data-label="Monthly" id="netTaxableGain">-$192.92</td>
+          <td data-label="Weekly" id="netTaxableGain">-$44.52</td>
+        </tr>
+        <tr class="bold">
+          <td data-label="Summary">
+            Tax Return ie Cash Back / (Tax Payable)
+          </td>
+          <td style="display:none;" data-label="Per Col K" id="taxReturnCashBack">45.00%</td>
+          <td data-label="Yearly" id="taxReturnCashBack">$1,041.75</td>
+          <td data-label="Monthly" id="taxReturnCashBack">$86.81</td>
+          <td data-label="Weekly" id="taxReturnCashBack">$20.03</td>
+        </tr>
+        <tr class="bold__row">
+          <td style="display:none;" data-label="Per Col K" id="netCashOut">$0</td>
+            <td data-label="Summary">
+              Net Cash (Out ) / In Flow After Tax (Approx)
+            </td>
+            <td data-label="Yearly" class="red__flag--nco" id="netCashOut" style="background: rgb(231, 76, 60); color: rgb(255, 255, 255);">-$1,273.25</td>
+            <td data-label="Monthly" class="red__flag--nco" id="netCashOut" style="background: rgb(231, 76, 60); color: rgb(255, 255, 255);">-$106.1</td>
+            <td data-label="Weekly" class="red__flag--nco" id="netCashOut" style="background: rgb(231, 76, 60); color: rgb(255, 255, 255);">-$24.49</td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="custom.js"></script>
+</body>
+</html>
